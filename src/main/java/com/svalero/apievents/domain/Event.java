@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotNull(message = "Event name is required")
     @Column(name = "event_name",nullable = false, unique = true)
     private String eventName;
