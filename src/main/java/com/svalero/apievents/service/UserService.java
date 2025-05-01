@@ -2,10 +2,12 @@ package com.svalero.apievents.service;
 
 import com.svalero.apievents.domain.User;
 import com.svalero.apievents.domain.dto.UserDto;
+import com.svalero.apievents.domain.dto.UserInDto;
 import com.svalero.apievents.exception.UserNotFoundException;
 import com.svalero.apievents.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -19,19 +21,14 @@ public class UserService {
     private final UserRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public UserDto findByUsername (String username) {
-
-        User user = userRepository.findByUsername(username);
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-
-        return userDto;
-    }
 
     // Obtener todos los usuarios
     public List<User> getAllUsers() {
@@ -54,9 +51,29 @@ public class UserService {
     }
 
     // Guardar un nuevo usuario
-    public User saveUser(User user) {
+   /* public User saveUser(User user) {
         return userRepository.save(user);
+    }*/
+
+    public UserDto saveUser(UserInDto userInDto) {
+        User user = new User();
+        user.setUsername(user.getUsername());
+        user.setPassword(passwordEncoder.encode(userInDto.getPassword()));
+        userRepository.save(user);
+
+        UserDto userDto = new UserDto();
+        userDto.setUsername(user.getUsername());
+        return userDto;
     }
+
+    public UserDto findByUsername (String username) {
+
+        User user = userRepository.findByUsername(username);
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+
+        return userDto;
+    }
+
 
     // Actualizar un usuario por ID
     public User updateUser(Long id, User userDetails) throws UserNotFoundException {

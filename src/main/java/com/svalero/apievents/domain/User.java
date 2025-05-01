@@ -20,6 +20,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column
+    private String username;
     @NotNull(message = "Name is required")
     @Column(nullable = false, unique = true)
     private String name;

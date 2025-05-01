@@ -1,6 +1,8 @@
 package com.svalero.apievents.controller;
 
 import com.svalero.apievents.domain.User;
+import com.svalero.apievents.domain.dto.UserDto;
+import com.svalero.apievents.domain.dto.UserInDto;
 import com.svalero.apievents.exception.UserNotFoundException;
 import com.svalero.apievents.service.UserService;
 import jakarta.validation.Valid;
@@ -37,13 +39,20 @@ public class UserController {
     }
 
     // Agregar un nuevo usuario
-    @PostMapping
-    public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
+   /* public ResponseEntity<User> addUser(@Valid @RequestBody User user) {
         logger.info("BEGIN addUser - Adding user: {}", user.getEmail());
         User newUser = userService.saveUser(user);
         logger.info("END addUser - User added with ID: {}", newUser.getId());
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }*/
+    @PostMapping
+    public ResponseEntity<UserDto> addUser(@Valid @RequestBody UserInDto userInDto) {
+        logger.info("BEGIN addUser - Adding user: {}", userInDto.getEmail());
+        UserDto newUser = userService.saveUser(userInDto);
+        logger.info("END addUser - User added with email: {}", newUser.getEmail());
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
+
 
     // Buscar un usuario por email
     @GetMapping("/email")
