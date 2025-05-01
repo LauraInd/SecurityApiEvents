@@ -274,3 +274,108 @@ Action:
 
 Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
 
+2025-05-01 17:10:39,942 INFO o.h.v.i.u.Version {<clinit>} [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2025-05-01 17:10:39,992 INFO o.s.b.StartupInfoLogger {logStarting} [main] Starting ApieventsApplication using Java 23.0.2 with PID 40411 (/Users/lauraindia/Desktop/DAM/AccesoDatos/apievents/target/classes started by lauraindia in /Users/lauraindia/Desktop/DAM/AccesoDatos/apievents)
+2025-05-01 17:10:39,994 INFO o.s.b.SpringApplication {logStartupProfileInfo} [main] No active profile set, falling back to 1 default profile: "default"
+2025-05-01 17:10:40,730 INFO o.s.d.r.c.RepositoryConfigurationDelegate {registerRepositoriesIn} [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-01 17:10:40,807 INFO o.s.d.r.c.RepositoryConfigurationDelegate {registerRepositoriesIn} [main] Finished Spring Data repository scanning in 67 ms. Found 5 JPA repository interfaces.
+2025-05-01 17:10:41,501 INFO o.s.b.w.e.t.TomcatWebServer {initialize} [main] Tomcat initialized with port 8080 (http)
+2025-05-01 17:10:41,517 INFO o.a.j.l.DirectJDKLog {log} [main] Initializing ProtocolHandler ["http-nio-8080"]
+2025-05-01 17:10:41,524 INFO o.a.j.l.DirectJDKLog {log} [main] Starting service [Tomcat]
+2025-05-01 17:10:41,525 INFO o.a.j.l.DirectJDKLog {log} [main] Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-05-01 17:10:41,597 INFO o.a.j.l.DirectJDKLog {log} [main] Initializing Spring embedded WebApplicationContext
+2025-05-01 17:10:41,598 INFO o.s.b.w.s.c.ServletWebServerApplicationContext {prepareWebApplicationContext} [main] Root WebApplicationContext: initialization completed in 1554 ms
+2025-05-01 17:10:41,635 INFO c.z.h.HikariDataSource {getConnection} [main] HikariPool-1 - Starting...
+2025-05-01 17:10:41,960 INFO c.z.h.p.HikariPool {checkFailFast} [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/users.db user=SA
+2025-05-01 17:10:41,962 INFO c.z.h.HikariDataSource {getConnection} [main] HikariPool-1 - Start completed.
+2025-05-01 17:10:41,974 INFO o.s.b.a.h.H2ConsoleAutoConfiguration {logDataSources} [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/users.db'
+2025-05-01 17:10:42,125 INFO o.h.j.i.u.LogHelper {logPersistenceUnitInformation} [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-01 17:10:42,228 INFO o.h.Version {logVersion} [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-05-01 17:10:42,279 INFO o.h.c.i.RegionFactoryInitiator {initiateService} [main] HHH000026: Second-level cache disabled
+2025-05-01 17:10:42,757 INFO o.s.o.j.p.SpringPersistenceUnitInfo {addTransformer} [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-01 17:10:42,831 WARN o.h.e.j.d.i.DialectFactoryImpl {constructDialect} [main] HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-01 17:10:44,115 INFO o.h.e.t.j.p.i.JtaPlatformInitiator {initiateService} [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-01 17:10:44,180 INFO o.s.o.j.AbstractEntityManagerFactoryBean {buildNativeEntityManagerFactory} [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01 17:10:44,534 ERROR o.s.b.w.e.t.TomcatStarter {onStartup} [main] Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'appConfig': Unsatisfied dependency expressed through field 'eventsUserDetailsService': Error creating bean with name 'eventsUserDetailsService': Unsatisfied dependency expressed through field 'userService': Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'passwordEncoder': Error creating bean with name 'appConfig': Requested bean is currently in creation: Is there an unresolvable circular reference?
+2025-05-01 17:10:44,573 INFO o.a.j.l.DirectJDKLog {log} [main] Stopping service [Tomcat]
+2025-05-01 17:10:44,579 WARN o.s.c.s.AbstractApplicationContext {refresh} [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-05-01 17:10:44,580 INFO o.s.o.j.AbstractEntityManagerFactoryBean {destroy} [main] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01 17:10:44,582 INFO c.z.h.HikariDataSource {close} [main] HikariPool-1 - Shutdown initiated...
+2025-05-01 17:10:44,838 INFO c.z.h.HikariDataSource {close} [main] HikariPool-1 - Shutdown completed.
+2025-05-01 17:10:44,851 INFO o.s.b.a.l.ConditionEvaluationReportLogger {logMessage} [main] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-05-01 17:10:44,884 ERROR o.s.b.d.LoggingFailureAnalysisReporter {report} [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  appConfig (field private com.svalero.apievents.security.EventsUserDetailsService com.svalero.apievents.config.AppConfig.eventsUserDetailsService)
+↑     ↓
+|  eventsUserDetailsService (field private com.svalero.apievents.service.UserService com.svalero.apievents.security.EventsUserDetailsService.userService)
+↑     ↓
+|  userService (field private org.springframework.security.crypto.password.PasswordEncoder com.svalero.apievents.service.UserService.passwordEncoder)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2025-05-01 17:14:00,555 INFO o.h.v.i.u.Version {<clinit>} [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2025-05-01 17:14:00,604 INFO o.s.b.StartupInfoLogger {logStarting} [main] Starting ApieventsApplication using Java 23.0.2 with PID 42477 (/Users/lauraindia/Desktop/DAM/AccesoDatos/apievents/target/classes started by lauraindia in /Users/lauraindia/Desktop/DAM/AccesoDatos/apievents)
+2025-05-01 17:14:00,605 INFO o.s.b.SpringApplication {logStartupProfileInfo} [main] No active profile set, falling back to 1 default profile: "default"
+2025-05-01 17:14:01,126 WARN o.s.c.s.AbstractApplicationContext {refresh} [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'passwordEncoder' defined in class path resource [com/svalero/apievents/config/CommonSecurityConfig.class]: Cannot register bean definition [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=commonSecurityConfig; factoryMethodName=passwordEncoder; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/svalero/apievents/config/CommonSecurityConfig.class]] for bean 'passwordEncoder' since there is already [Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=appConfig; factoryMethodName=passwordEncoder; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/svalero/apievents/config/AppConfig.class]] bound.
+2025-05-01 17:14:01,133 INFO o.s.b.a.l.ConditionEvaluationReportLogger {logMessage} [main] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-05-01 17:14:01,160 ERROR o.s.b.d.LoggingFailureAnalysisReporter {report} [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'passwordEncoder', defined in class path resource [com/svalero/apievents/config/CommonSecurityConfig.class], could not be registered. A bean with that name has already been defined in class path resource [com/svalero/apievents/config/AppConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2025-05-01 17:14:42,047 INFO o.h.v.i.u.Version {<clinit>} [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2025-05-01 17:14:42,096 INFO o.s.b.StartupInfoLogger {logStarting} [main] Starting ApieventsApplication using Java 23.0.2 with PID 42942 (/Users/lauraindia/Desktop/DAM/AccesoDatos/apievents/target/classes started by lauraindia in /Users/lauraindia/Desktop/DAM/AccesoDatos/apievents)
+2025-05-01 17:14:42,097 INFO o.s.b.SpringApplication {logStartupProfileInfo} [main] No active profile set, falling back to 1 default profile: "default"
+2025-05-01 17:14:42,845 INFO o.s.d.r.c.RepositoryConfigurationDelegate {registerRepositoriesIn} [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-01 17:14:42,925 INFO o.s.d.r.c.RepositoryConfigurationDelegate {registerRepositoriesIn} [main] Finished Spring Data repository scanning in 68 ms. Found 5 JPA repository interfaces.
+2025-05-01 17:14:43,638 INFO o.s.b.w.e.t.TomcatWebServer {initialize} [main] Tomcat initialized with port 8080 (http)
+2025-05-01 17:14:43,658 INFO o.a.j.l.DirectJDKLog {log} [main] Initializing ProtocolHandler ["http-nio-8080"]
+2025-05-01 17:14:43,667 INFO o.a.j.l.DirectJDKLog {log} [main] Starting service [Tomcat]
+2025-05-01 17:14:43,668 INFO o.a.j.l.DirectJDKLog {log} [main] Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-05-01 17:14:43,745 INFO o.a.j.l.DirectJDKLog {log} [main] Initializing Spring embedded WebApplicationContext
+2025-05-01 17:14:43,747 INFO o.s.b.w.s.c.ServletWebServerApplicationContext {prepareWebApplicationContext} [main] Root WebApplicationContext: initialization completed in 1601 ms
+2025-05-01 17:14:43,788 INFO c.z.h.HikariDataSource {getConnection} [main] HikariPool-1 - Starting...
+2025-05-01 17:14:44,103 INFO c.z.h.p.HikariPool {checkFailFast} [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/users.db user=SA
+2025-05-01 17:14:44,104 INFO c.z.h.HikariDataSource {getConnection} [main] HikariPool-1 - Start completed.
+2025-05-01 17:14:44,117 INFO o.s.b.a.h.H2ConsoleAutoConfiguration {logDataSources} [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/users.db'
+2025-05-01 17:14:44,254 INFO o.h.j.i.u.LogHelper {logPersistenceUnitInformation} [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-01 17:14:44,325 INFO o.h.Version {logVersion} [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-05-01 17:14:44,365 INFO o.h.c.i.RegionFactoryInitiator {initiateService} [main] HHH000026: Second-level cache disabled
+2025-05-01 17:14:44,779 INFO o.s.o.j.p.SpringPersistenceUnitInfo {addTransformer} [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-01 17:14:44,849 WARN o.h.e.j.d.i.DialectFactoryImpl {constructDialect} [main] HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-01 17:14:46,175 INFO o.h.e.t.j.p.i.JtaPlatformInitiator {initiateService} [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-01 17:14:46,249 INFO o.s.o.j.AbstractEntityManagerFactoryBean {buildNativeEntityManagerFactory} [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01 17:14:47,006 INFO o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer {configure} [main] Global AuthenticationManager configured with UserDetailsService bean with name eventsUserDetailsService
+2025-05-01 17:14:47,042 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration {openEntityManagerInViewInterceptor} [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-01 17:14:47,710 INFO o.a.j.l.DirectJDKLog {log} [main] Starting ProtocolHandler ["http-nio-8080"]
+2025-05-01 17:14:47,912 INFO o.s.b.w.e.t.TomcatWebServer {start} [main] Tomcat started on port 8080 (http) with context path '/'
+2025-05-01 17:14:47,923 INFO o.s.b.StartupInfoLogger {logStarted} [main] Started ApieventsApplication in 6.405 seconds (process running for 6.835)
+2025-05-01 17:17:35,340 INFO o.s.o.j.AbstractEntityManagerFactoryBean {destroy} [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01 17:17:35,352 INFO c.z.h.HikariDataSource {close} [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2025-05-01 17:17:35,373 INFO c.z.h.HikariDataSource {close} [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
