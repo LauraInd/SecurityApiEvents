@@ -1,8 +1,10 @@
 package com.svalero.apievents.service;
 
 import com.svalero.apievents.domain.User;
+import com.svalero.apievents.domain.dto.UserDto;
 import com.svalero.apievents.exception.UserNotFoundException;
 import com.svalero.apievents.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -15,10 +17,20 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public UserDto findByUsername (String username) {
+
+        User user = userRepository.findByUsername(username);
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+
+        return userDto;
     }
 
     // Obtener todos los usuarios

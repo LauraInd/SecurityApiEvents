@@ -17,4 +17,6 @@ public interface UserRepository  extends CrudRepository<User, Long> {
 
     // Método para buscar todos los usuarios activos
     List<User> findByActiveTrue();
+
+    User findByUsername(String username);
 }
