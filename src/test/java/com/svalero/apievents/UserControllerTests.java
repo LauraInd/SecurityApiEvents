@@ -3,6 +3,8 @@ package com.svalero.apievents;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.svalero.apievents.controller.UserController;
 import com.svalero.apievents.domain.User;
+import com.svalero.apievents.domain.dto.UserDto;
+import com.svalero.apievents.domain.dto.UserInDto;
 import com.svalero.apievents.exception.UserNotFoundException;
 import com.svalero.apievents.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -79,16 +82,22 @@ class UserControllerTest {
     // 📌 Test para agregar un nuevo usuario
     @Test
     void testAddUser() throws Exception {
-        when(userService.saveUser(any(User.class))).thenReturn(user1);
+        UserInDto userInDto = new UserInDto("johndoe", "John Doe", "john@example.com", "1234", LocalDate.now());
+        UserDto userDto = new UserDto("John Doe", "johndoe", "john@example.com", "1234", true);
+
+        when(userService.saveUser(any(UserInDto.class))).thenReturn(userDto);
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(user1)))
+                        .content(objectMapper.writeValueAsString(userInDto)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.name").value("John Doe"));
+                .andExpect(jsonPath("$.name").value("John Doe"))
+                .andExpect(jsonPath("$.username").value("johndoe"))
+                .andExpect(jsonPath("$.email").value("john@example.com"));
 
-        verify(userService, times(1)).saveUser(any(User.class));
+        verify(userService, times(1)).saveUser(any(UserInDto.class));
     }
+
 
     // 📌 Test para buscar un usuario por email
     @Test

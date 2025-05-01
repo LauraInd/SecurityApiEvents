@@ -52,11 +52,6 @@ public class AppConfig {
     private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
-
-    @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }

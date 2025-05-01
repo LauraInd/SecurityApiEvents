@@ -1,6 +1,8 @@
 package com.svalero.apievents;
 
 import com.svalero.apievents.domain.User;
+import com.svalero.apievents.domain.dto.UserDto;
+import com.svalero.apievents.domain.dto.UserInDto;
 import com.svalero.apievents.exception.UserNotFoundException;
 import com.svalero.apievents.repository.UserRepository;
 import com.svalero.apievents.service.UserService;
@@ -12,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,14 +80,20 @@ class UserServiceTests {
     // 📌 Test para guardar un usuario
     @Test
     void testSaveUser() {
-        when(userRepository.save(user)).thenReturn(user);
+        UserInDto userInDto = new UserInDto("johndoe", "John Doe", "john@example.com", "1234", LocalDate.now());
+        User savedUser = new User(1L, "johndoe", "John Doe", "john@example.com", "1234", LocalDate.now(), true);
 
-        User savedUser = userService.saveUser(user);
+        when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-        assertNotNull(savedUser);
-        assertEquals("John Doe", savedUser.getName());
-        verify(userRepository, times(1)).save(user);
+        UserDto result = userService.saveUser(userInDto);
+
+        assertNotNull(result);
+        assertEquals("John Doe", result.getName());
+        assertEquals("johndoe", result.getUsername());
+        verify(userRepository, times(1)).save(any(User.class));
     }
+
+
 
     // 📌 Test para actualizar un usuario (completo)
     @Test
