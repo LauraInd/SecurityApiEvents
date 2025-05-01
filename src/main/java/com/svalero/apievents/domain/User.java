@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, unique = true)
-    @Size(min = 8, max = 30, message = "Password must be between 8 and 30 characters")
+    @Size(min = 8, max = 200, message = "Password must be between 8 and 30 characters")
     private String password;
     @Column(name = "creation_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")

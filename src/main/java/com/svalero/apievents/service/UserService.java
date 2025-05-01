@@ -57,12 +57,20 @@ public class UserService {
 
     public UserDto saveUser(UserInDto userInDto) {
         User user = new User();
-        user.setUsername(user.getUsername());
+        user.setUsername(userInDto.getUsername());
+        user.setName(userInDto.getName());
+        user.setEmail(userInDto.getEmail());
         user.setPassword(passwordEncoder.encode(userInDto.getPassword()));
+        user.setCreationDate(userInDto.getCreationDate());
+
         userRepository.save(user);
 
         UserDto userDto = new UserDto();
         userDto.setUsername(user.getUsername());
+        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword("********");
+
         return userDto;
     }
 
